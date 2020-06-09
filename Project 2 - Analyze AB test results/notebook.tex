@@ -1,0 +1,1436 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Analyze\_ab\_test\_results\_notebook}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Analyze A/B Test Results}\label{analyze-ab-test-results}
+
+This project will assure you have mastered the subjects covered in the
+statistics lessons. The hope is to have this project be as comprehensive
+of these topics as possible. Good luck!
+
+\subsection{Table of Contents}\label{table-of-contents}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{intro}
+\item
+  Section \ref{probability}
+\item
+  Section \ref{ab_test}
+\item
+  Section \ref{regression}
+\end{itemize}
+
+ \#\#\# Introduction
+
+A/B tests are very commonly performed by data analysts and data
+scientists. It is important that you get some practice working with the
+difficulties of these
+
+For this project, you will be working to understand the results of an
+A/B test run by an e-commerce website. Your goal is to work through this
+notebook to help the company understand if they should implement the new
+page, keep the old page, or perhaps run the experiment longer to make
+their decision.
+
+\textbf{As you work through this notebook, follow along in the classroom
+and answer the corresponding quiz questions associated with each
+question.} The labels for each classroom concept are provided for each
+question. This will assure you are on the right track as you work
+through the project, and you can feel more confident in your final
+submission meeting the criteria. As a final check, assure you meet all
+the criteria on the
+\href{https://review.udacity.com/\#!/projects/37e27304-ad47-4eb0-a1ab-8c12f60e43d0/rubric}{RUBRIC}.
+
+ \#\#\#\# Part I - Probability
+
+To get started, let's import our libraries.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{c+c1}{\PYZsh{}We are setting the seed to assure you get the same answers on quizzes as we set up}
+        \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{1.} Now, read in the \texttt{ab\_data.csv} data. Store it in
+\texttt{df}. \textbf{Use your dataframe to answer the questions in Quiz
+1 of the classroom.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Read in the dataset and take a look at the top few rows here:
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    user\_id                   timestamp      group landing\_page  converted
+        0   851104  2017-01-21 22:11:48.556739    control     old\_page          0
+        1   804228  2017-01-12 08:01:45.159739    control     old\_page          0
+        2   661590  2017-01-11 16:55:06.154213  treatment     new\_page          0
+        3   853541  2017-01-08 18:28:03.143765  treatment     new\_page          0
+        4   864975  2017-01-21 01:52:26.210827    control     old\_page          1
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Use the below cell to find the number of rows in the dataset.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{total\PYZus{}rows} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}rows}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+294478
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The number of unique users in the dataset.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 290584
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  The proportion of users converted.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{converted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 0.11965919355605512
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  The number of times the \texttt{new\_page} and \texttt{treatment}
+  don't line up.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{mismatch} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{treatment}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ \PYZam{} landing\PYZus{}page != }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{new\PYZus{}page}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ | group == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{control}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ \PYZam{} landing\PYZus{}page != }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{old\PYZus{}page}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are a total of}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mismatch}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rows that do not line up}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are a total of 3893 rows that do not line up
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Do any of the rows have missing values?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 294478 entries, 0 to 294477
+Data columns (total 5 columns):
+user\_id         294478 non-null int64
+timestamp       294478 non-null object
+group           294478 non-null object
+landing\_page    294478 non-null object
+converted       294478 non-null int64
+dtypes: int64(2), object(3)
+memory usage: 11.2+ MB
+
+    \end{Verbatim}
+
+    \texttt{2.} For the rows where \textbf{treatment} is not aligned with
+\textbf{new\_page} or \textbf{control} is not aligned with
+\textbf{old\_page}, we cannot be sure if this row truly received the new
+or old page. Use \textbf{Quiz 2} in the classroom to provide how we
+should handle these rows.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Now use the answer to the quiz to create a new dataset that meets the
+  specifications from the quiz. Store your new dataframe in
+  \textbf{df2}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The best approach is to remove these mismatched rows once }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ represents only }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f the total dataset}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mismatch}\PY{p}{,} \PY{p}{(}\PY{n}{mismatch}\PY{o}{/}\PY{n}{total\PYZus{}rows}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The best approach is to remove these mismatched rows once 3893 represents only 1.32\% of the total dataset
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df2} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{treatment}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ \PYZam{} landing\PYZus{}page == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{new\PYZus{}page}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ | group == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{control}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ \PYZam{} landing\PYZus{}page == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{old\PYZus{}page}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}    user\_id                   timestamp      group landing\_page  converted
+        0   851104  2017-01-21 22:11:48.556739    control     old\_page          0
+        1   804228  2017-01-12 08:01:45.159739    control     old\_page          0
+        2   661590  2017-01-11 16:55:06.154213  treatment     new\_page          0
+        3   853541  2017-01-08 18:28:03.143765  treatment     new\_page          0
+        4   864975  2017-01-21 01:52:26.210827    control     old\_page          1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Double Check all of the correct rows were removed \PYZhy{} this should be 0}
+         \PY{n}{df2}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{treatment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{==} \PY{p}{(}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{landing\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{new\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 0
+\end{Verbatim}
+            
+    \texttt{3.} Use \textbf{df2} and the cells below to answer questions for
+\textbf{Quiz3} in the classroom.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  How many unique \textbf{user\_id}s are in \textbf{df2}?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 290584
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  There is one \textbf{user\_id} repeated in \textbf{df2}. What is it?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df2}\PY{p}{[}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 2893    773192
+         Name: user\_id, dtype: int64
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  What is the row information for the repeat \textbf{user\_id}?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df2}\PY{p}{[}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}       user\_id                   timestamp      group landing\_page  converted
+         2893   773192  2017-01-14 02:55:59.590927  treatment     new\_page          0
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Remove \textbf{one} of the rows with a duplicate \textbf{user\_id},
+  but keep your dataframe as \textbf{df2}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{df2}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{4.} Use \textbf{df2} in the below cells to answer the quiz
+questions related to \textbf{Quiz 4} in the classroom.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  What is the probability of an individual converting regardless of the
+  page they receive?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df2}\PY{o}{.}\PY{n}{converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 0.11959708724499628
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Given that an individual was in the \texttt{control} group, what is
+  the probability they converted?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{p\PYZus{}control\PYZus{}convert} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{n}{df2}\PY{o}{.}\PY{n}{group} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{p\PYZus{}control\PYZus{}convert}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} 0.1203863045004612
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Given that an individual was in the \texttt{treatment} group, what is
+  the probability they converted?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{p\PYZus{}treat\PYZus{}convert} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{n}{df2}\PY{o}{.}\PY{n}{group} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{treatment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{p\PYZus{}treat\PYZus{}convert}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} 0.11880806551510564
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  What is the probability that an individual received the new page?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df2}\PY{p}{[}\PY{n}{df2}\PY{o}{.}\PY{n}{landing\PYZus{}page} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{new\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{df2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 0.5000619442226688
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Consider your results from a. through d. above, and explain below
+  whether you think there is sufficient evidence to say that the new
+  treatment page leads to more conversions.
+\end{enumerate}
+
+    \textbf{There are no sufficient evidence to say that the new landing
+page showed to the treatment group will led to a greater conversion,
+this is because the probability of convertion, from a practical point of
+view, is very close for both groups and most important, a rigorous
+statistical testing shall be performed to confirm if this difference is
+statistical significant}
+
+     \#\#\# Part II - A/B Test
+
+Notice that because of the time stamp associated with each event, you
+could technically run a hypothesis test continuously as each observation
+was observed.
+
+However, then the hard question is do you stop as soon as one page is
+considered significantly better than another or does it need to happen
+consistently for a certain amount of time? How long do you run to render
+a decision that neither page is better than another?
+
+These questions are the difficult parts associated with A/B tests in
+general.
+
+\texttt{1.} For now, consider you need to make the decision just based
+on all the data provided. If you want to assume that the old page is
+better unless the new page proves to be definitely better at a Type I
+error rate of 5\%, what should your null and alternative hypotheses be?
+You can state your hypothesis in terms of words or in terms of
+\textbf{\(p_{old}\)} and \textbf{\(p_{new}\)}, which are the converted
+rates for the old and new pages.
+
+    \begin{quote}
+Type I error of 5\% is equivalent to \(\alpha = 0.05\), with the Null
+Hypothesis (\(H_0\)) and the Alternative Hypothesis (\(H_1\)) as follows
+(\(\mu\) represents average convertion parameter or simply
+\(p_\text{old/new}\)):
+\end{quote}
+
+\[
+H_0: \mu_\text{new} \leq \mu_\text{old}
+\] \[
+H_1: \mu_\text{new} \gt \mu_\text{old}
+\]
+
+\begin{quote}
+With the following interpretation for the \texttt{p-value}: \[
+p \leq \alpha \; \text{reject} \; H_0
+\] \[
+p \gt \alpha \; \text{fail to reject} \; H_0
+\]
+\end{quote}
+
+    \texttt{2.} Assume under the null hypothesis, \(p_{new}\) and
+\(p_{old}\) both have "true" success rates equal to the
+\textbf{converted} success rate regardless of page - that is \(p_{new}\)
+and \(p_{old}\) are equal. Furthermore, assume they are equal to the
+\textbf{converted} rate in \textbf{ab\_data.csv} regardless of the page.
+
+Use a sample size for each page equal to the ones in
+\textbf{ab\_data.csv}.
+
+Perform the sampling distribution for the difference in
+\textbf{converted} between the two pages over 10,000 iterations of
+calculating an estimate from the null.
+
+Use the cells below to provide the necessary parts of this simulation.
+If this doesn't make complete sense right now, don't worry - you are
+going to work through the problems below to complete this problem. You
+can use \textbf{Quiz 5} in the classroom to make sure you are on the
+right track.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{success\PYZus{}rate} \PY{o}{=} \PY{p}{(}\PY{n}{df2}\PY{o}{.}\PY{n}{converted} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{success\PYZus{}rate}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}77}]:} 0.11959708724499628
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  What is the \textbf{convert rate} for \(p_{new}\) under the null?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{p\PYZus{}new} \PY{o}{=} \PY{n}{success\PYZus{}rate}
+         \PY{n}{p\PYZus{}new}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:} 0.11959708724499628
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What is the \textbf{convert rate} for \(p_{old}\) under the null? 
+\end{enumerate}
+
+    \begin{quote}
+\textbf{According to statement}
+\end{quote}
+
+\begin{quote}
+Assume under the null hypothesis, \(p_{new}\) and \(p_{old}\) both have
+"true" success rates equal to the \textbf{converted} success rate
+regardless of page - that is \(p_{new}\) and \(p_{old}\) are equal.
+Furthermore, assume they are equal to the \textbf{converted} rate in
+\textbf{ab\_data.csv} regardless of the page.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{p\PYZus{}old} \PY{o}{=} \PY{n}{success\PYZus{}rate}
+         \PY{n}{p\PYZus{}old}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:} 0.11959708724499628
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  What is \(n_{new}\)?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{n\PYZus{}new} \PY{o}{=} \PY{p}{(}\PY{n}{df2}\PY{o}{.}\PY{n}{landing\PYZus{}page} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{new\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{n\PYZus{}new}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} 145310
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  What is \(n_{old}\)?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{n\PYZus{}old} \PY{o}{=} \PY{p}{(}\PY{n}{df2}\PY{o}{.}\PY{n}{landing\PYZus{}page} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{old\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{n\PYZus{}old}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}82}]:} 145274
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Simulate \(n_{new}\) transactions with a convert rate of \(p_{new}\)
+  under the null. Store these \(n_{new}\) 1's and 0's in
+  \textbf{new\_page\_converted}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{new\PYZus{}page\PYZus{}converted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p\PYZus{}new}\PY{p}{,} \PY{n}{n\PYZus{}new}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{new\PYZus{}page\PYZus{}converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} 0.12025325166884591
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Simulate \(n_{old}\) transactions with a convert rate of \(p_{old}\)
+  under the null. Store these \(n_{old}\) 1's and 0's in
+  \textbf{old\_page\_converted}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{old\PYZus{}page\PYZus{}converted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p\PYZus{}old}\PY{p}{,} \PY{n}{n\PYZus{}old}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{old\PYZus{}page\PYZus{}converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:} 0.11839696022688162
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Find \(p_{new}\) - \(p_{old}\) for your simulated values from part (e)
+  and (f).
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{new\PYZus{}page\PYZus{}converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{old\PYZus{}page\PYZus{}converted}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0018562914419642945
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Simulate 10,000 \(p_{new}\) - \(p_{old}\) values using this same
+  process similarly to the one you calculated in parts \textbf{a.
+  through g.} above. Store all 10,000 values in a numpy array called
+  \textbf{p\_diffs}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{p\PYZus{}diffs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{new\PYZus{}page} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p\PYZus{}new}\PY{p}{,} \PY{n}{n\PYZus{}new}\PY{p}{)}\PY{p}{)}
+             \PY{n}{old\PYZus{}page} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p\PYZus{}old}\PY{p}{,} \PY{n}{n\PYZus{}old}\PY{p}{)}\PY{p}{)}
+             \PY{n}{p\PYZus{}diffs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}page} \PY{o}{\PYZhy{}} \PY{n}{old\PYZus{}page}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  Plot a histogram of the \textbf{p\_diffs}. Does this plot look like
+  what you expected? Use the matching problem in the classroom to assure
+  you fully understand what was computed here.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p\PYZus{}diffs}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  What proportion of the \textbf{p\_diffs} are greater than the actual
+  difference observed in \textbf{ab\_data.csv}?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p\PYZus{}diffs}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{p}{(}\PY{n}{p\PYZus{}treat\PYZus{}convert} \PY{o}{\PYZhy{}} \PY{n}{p\PYZus{}control\PYZus{}convert}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}97}]:} 0.8992
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  In words, explain what you just computed in part \textbf{j.} What is
+  this value called in scientific studies? What does this value mean in
+  terms of whether or not there is a difference between the new and old
+  pages?
+\end{enumerate}
+
+    \begin{quote}
+\textbf{In part \texttt{j} is computed the \emph{p-value} that allows us
+in conjunction with the pre-defined \(\alpha\) to statistically reject
+or not the \(H_0\) hypothesis. In this case the p-value of
+\texttt{0.8992} is greater the \(\alpha=0.05\), so it is not possible to
+reject the null hypothesis, in other others, we do not have statistical
+significance to say that the new page is better than the old landing
+page.}
+\end{quote}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  We could also use a built-in to achieve similar results. Though using
+  the built-in might be easier to code, the above portions are a
+  walkthrough of the ideas that are critical to correctly thinking about
+  statistical significance. Fill in the below to calculate the number of
+  conversions for each page, as well as the number of individuals who
+  received each page. Let \texttt{n\_old} and \texttt{n\_new} refer the
+  the number of rows associated with the old page and new pages,
+  respectively.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+          
+          \PY{n}{convert\PYZus{}old} \PY{o}{=} \PY{n}{df2}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{group == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{control}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ and converted == 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{convert\PYZus{}new} \PY{o}{=} \PY{n}{df2}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{group == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{treatment}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ and converted == 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{n\PYZus{}old} \PY{o}{=} \PY{n}{df2}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{group == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{control}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{n\PYZus{}new} \PY{o}{=} \PY{n}{df2}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{group == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{treatment}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  Now use \texttt{stats.proportions\_ztest} to compute your test
+  statistic and p-value.
+  \href{http://knowledgetack.com/python/statsmodels/proportions_ztest/}{Here}
+  is a helpful link on using the built in.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{z\PYZus{}score}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{proportions\PYZus{}ztest}\PY{p}{(}\PY{p}{[}\PY{n}{convert\PYZus{}old}\PY{p}{,} \PY{n}{convert\PYZus{}new}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{n\PYZus{}old}\PY{p}{,} \PY{n}{n\PYZus{}new}\PY{p}{]}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{z\PYZus{}score}\PY{p}{,} \PY{n}{p\PYZus{}value}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:} (1.3109241984234394, 0.9050583127590245)
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  What do the z-score and p-value you computed in the previous question
+  mean for the conversion rates of the old and new pages? Do they agree
+  with the findings in parts \textbf{j.} and \textbf{k.}?
+\end{enumerate}
+
+    \begin{quote}
+The \texttt{z-score} calculated in this step of 1.31 represents a
+p-value of \(0.9049\) according to the
+\href{http://www.z-table.com/uploads/2/1/7/9/21795380/8573955.png?759}{z-table}.
+This gives us a confidence interval of 90\% but the required
+(\(\alpha=0.05\)) was 95\%, so it is not possible to reject the null.
+For reference, the \texttt{z-score} is calculated as follows:
+\end{quote}
+
+\[
+\text{z-score}=\frac{\bar{x}-\mu}{\sigma}
+\]
+
+\begin{quote}
+\textbf{Both \texttt{j.} and \texttt{k.} are as expected.}
+\end{quote}
+
+     \#\#\# Part III - A regression approach
+
+\texttt{1.} In this final part, you will see that the result you
+acheived in the previous A/B test can also be acheived by performing
+regression.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Since each row is either a conversion or no conversion, what type of
+  regression should you be performing in this case?
+\end{enumerate}
+
+    \begin{quote}
+\textbf{Once, it is a binomial class prediction (e.g., true/false,
+fraud/no-fraud, ...) this is addressed by the
+\texttt{Logistic\ Regression}}
+\end{quote}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The goal is to use \textbf{statsmodels} to fit the regression model
+  you specified in part \textbf{a.} to see if there is a significant
+  difference in conversion based on which page a customer receives.
+  However, you first need to create a column for the intercept, and
+  create a dummy variable column for which page each user received. Add
+  an \textbf{intercept} column, as well as an \textbf{ab\_page} column,
+  which is 1 when an individual receives the \textbf{treatment} and 0 if
+  \textbf{control}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{df2}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{df2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:}    user\_id                   timestamp      group landing\_page  converted  \textbackslash{}
+          0   851104  2017-01-21 22:11:48.556739    control     old\_page          0   
+          1   804228  2017-01-12 08:01:45.159739    control     old\_page          0   
+          2   661590  2017-01-11 16:55:06.154213  treatment     new\_page          0   
+          3   853541  2017-01-08 18:28:03.143765  treatment     new\_page          0   
+          4   864975  2017-01-21 01:52:26.210827    control     old\_page          1   
+          
+             intercept  control  ab\_page  
+          0          1        1        0  
+          1          1        1        0  
+          2          1        0        1  
+          3          1        0        1  
+          4          1        1        0  
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Use \textbf{statsmodels} to import your regression model. Instantiate
+  the model, and fit the model using the two columns you created in part
+  \textbf{b.} to predict whether or not an individual converts.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{Logit}\PY{p}{(}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{converted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df2}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimization terminated successfully.
+         Current function value: 0.366118
+         Iterations 6
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Provide the summary of your model below, and use it as necessary to
+  answer the following questions.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{c+c1}{\PYZsh{} this cell is to overcome the \PYZdq{}AttributeError: module \PYZsq{}scipy.stats\PYZsq{} has no attribute \PYZsq{}chisqprob\PYZsq{} \PYZdq{}}
+          
+          \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+          \PY{n}{stats}\PY{o}{.}\PY{n}{chisqprob} \PY{o}{=} \PY{k}{lambda} \PY{n}{chisq}\PY{p}{,} \PY{n}{df}\PY{p}{:} \PY{n}{stats}\PY{o}{.}\PY{n}{chi2}\PY{o}{.}\PY{n}{sf}\PY{p}{(}\PY{n}{chisq}\PY{p}{,} \PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{result}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}111}]:} <class 'statsmodels.iolib.summary.Summary'>
+          """
+                                     Logit Regression Results                           
+          ==============================================================================
+          Dep. Variable:              converted   No. Observations:               290584
+          Model:                          Logit   Df Residuals:                   290582
+          Method:                           MLE   Df Model:                            1
+          Date:                Mon, 08 Jun 2020   Pseudo R-squ.:               8.077e-06
+          Time:                        20:28:57   Log-Likelihood:            -1.0639e+05
+          converged:                       True   LL-Null:                   -1.0639e+05
+                                                  LLR p-value:                    0.1899
+          ==============================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+          ------------------------------------------------------------------------------
+          intercept     -1.9888      0.008   -246.669      0.000      -2.005      -1.973
+          ab\_page       -0.0150      0.011     -1.311      0.190      -0.037       0.007
+          ==============================================================================
+          """
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  What is the p-value associated with \textbf{ab\_page}? Why does it
+  differ from the value you found in \textbf{Part II}? \textbf{Hint}:
+  What are the null and alternative hypotheses associated with your
+  regression model, and how do they compare to the null and alternative
+  hypotheses in the \textbf{Part II}?
+\end{enumerate}
+
+    \begin{quote}
+The p-value associated with \textbf{ab\_page} is \(0.190\). In Part II,
+the \(H_0\) is that the \texttt{p\_new} \(\leq\) \texttt{p\_old} and
+\(H_1\) that \texttt{p\_new} \(\gt\) \texttt{p\_old}. But for the
+\texttt{logistic\ regression} tests the null hypothesis that the type of
+the page has no correlation with the dependent variable as a two tailed
+test.
+\end{quote}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Now, you are considering other things that might influence whether or
+  not an individual converts. Discuss why it is a good idea to consider
+  other factors to add into your regression model. Are there any
+  disadvantages to adding additional terms into your regression model?
+\end{enumerate}
+
+    \begin{quote}
+Using other factors during the regression model allows new insights and
+possibilities to improve the model and evaluate the contribution of each
+additional term. However, it is required to pay attention because the
+additional terms must be independents and avoid some issues like
+multicollinearity, non-constant variance and normally distributed
+errors, among others. So, if possible, keeping the model simple is a
+good approach.
+\end{quote}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Now along with testing if the conversion rate changes for different
+  pages, also add an effect based on which country a user lives. You
+  will need to read in the \textbf{countries.csv} dataset and merge
+  together your datasets on the approporiate rows.
+  \href{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.join.html}{Here}
+  are the docs for joining tables.
+\end{enumerate}
+
+Does it appear that country had an impact on conversion? Don't forget to
+create dummy variables for these country columns - \textbf{Hint: You
+will need two columns for the three dummy variables.} Provide the
+statistical output as well as a written response to answer this
+question.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{countries\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./countries.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{countries\PYZus{}df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df2}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}112}]:}         country                   timestamp      group landing\_page  \textbackslash{}
+          user\_id                                                               
+          834778       UK  2017-01-14 23:08:43.304998    control     old\_page   
+          928468       US  2017-01-23 14:44:16.387854  treatment     new\_page   
+          822059       UK  2017-01-16 14:04:14.719771  treatment     new\_page   
+          711597       UK  2017-01-22 03:14:24.763511    control     old\_page   
+          710616       UK  2017-01-16 13:14:44.000513  treatment     new\_page   
+          
+                   converted  intercept  control  ab\_page  
+          user\_id                                          
+          834778           0          1        1        0  
+          928468           0          1        0        1  
+          822059           1          1        0        1  
+          711597           0          1        1        0  
+          710616           0          1        0        1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{US}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}114}]:}         country                   timestamp      group landing\_page  \textbackslash{}
+          user\_id                                                               
+          834778       UK  2017-01-14 23:08:43.304998    control     old\_page   
+          928468       US  2017-01-23 14:44:16.387854  treatment     new\_page   
+          822059       UK  2017-01-16 14:04:14.719771  treatment     new\_page   
+          711597       UK  2017-01-22 03:14:24.763511    control     old\_page   
+          710616       UK  2017-01-16 13:14:44.000513  treatment     new\_page   
+          
+                   converted  intercept  control  ab\_page  CA  UK  US  
+          user\_id                                                      
+          834778           0          1        1        0   0   1   0  
+          928468           0          1        0        1   0   0   1  
+          822059           1          1        0        1   0   1   0  
+          711597           0          1        1        0   0   1   0  
+          710616           0          1        0        1   0   1   0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{Logit}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{converted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{result}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimization terminated successfully.
+         Current function value: 0.366113
+         Iterations 6
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}117}]:} <class 'statsmodels.iolib.summary.Summary'>
+          """
+                                     Logit Regression Results                           
+          ==============================================================================
+          Dep. Variable:              converted   No. Observations:               290584
+          Model:                          Logit   Df Residuals:                   290580
+          Method:                           MLE   Df Model:                            3
+          Date:                Mon, 08 Jun 2020   Pseudo R-squ.:               2.323e-05
+          Time:                        20:48:08   Log-Likelihood:            -1.0639e+05
+          converged:                       True   LL-Null:                   -1.0639e+05
+                                                  LLR p-value:                    0.1760
+          ==============================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+          ------------------------------------------------------------------------------
+          intercept     -1.9893      0.009   -223.763      0.000      -2.007      -1.972
+          ab\_page       -0.0149      0.011     -1.307      0.191      -0.037       0.007
+          CA            -0.0408      0.027     -1.516      0.130      -0.093       0.012
+          UK             0.0099      0.013      0.743      0.457      -0.016       0.036
+          ==============================================================================
+          """
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Though you have now looked at the individual factors of country and
+  page on conversion, we would now like to look at an interaction
+  between page and country to see if there significant effects on
+  conversion. Create the necessary additional columns, and fit the new
+  model.
+\end{enumerate}
+
+Provide the summary results, and your conclusions based on the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page\PYZus{}CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page\PYZus{}UK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{Logit}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{converted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page\PYZus{}CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ab\PYZus{}page\PYZus{}UK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{result}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimization terminated successfully.
+         Current function value: 0.366109
+         Iterations 6
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:} <class 'statsmodels.iolib.summary.Summary'>
+          """
+                                     Logit Regression Results                           
+          ==============================================================================
+          Dep. Variable:              converted   No. Observations:               290584
+          Model:                          Logit   Df Residuals:                   290578
+          Method:                           MLE   Df Model:                            5
+          Date:                Mon, 08 Jun 2020   Pseudo R-squ.:               3.482e-05
+          Time:                        20:50:07   Log-Likelihood:            -1.0639e+05
+          converged:                       True   LL-Null:                   -1.0639e+05
+                                                  LLR p-value:                    0.1920
+          ==============================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+          ------------------------------------------------------------------------------
+          intercept     -1.9865      0.010   -206.344      0.000      -2.005      -1.968
+          ab\_page       -0.0206      0.014     -1.505      0.132      -0.047       0.006
+          CA            -0.0175      0.038     -0.465      0.642      -0.091       0.056
+          UK            -0.0057      0.019     -0.306      0.760      -0.043       0.031
+          ab\_page\_CA    -0.0469      0.054     -0.872      0.383      -0.152       0.059
+          ab\_page\_UK     0.0314      0.027      1.181      0.238      -0.021       0.084
+          ==============================================================================
+          """
+\end{Verbatim}
+            
+     \#\# Conclusions The \texttt{logistic\ regression} models do not
+presents good p-values when using the country information, despite the
+reduction of the p-value with the inclusion of \textbf{country} (0.1760
+from the original 0.1899), it is not relevant when compared with the
+required \(0.05\) (\(\alpha\) level), also the inclusion of a feature
+that represents the interaction of page and country
+(\texttt{ab\_page\_CA} and \texttt{ab\_page\_UK}) this is not an
+informative attribute to include in our model (p-value raised from
+0.1760 to 0.1920), also this compound feature introduces complexity to
+interpret the model.
+
+\textbf{In summary, based on the significance statistical analysis, it
+is recommended to do not spend the effort on a new landing page
+considered the data available. }
+
+\subsubsection{Gather Submission
+Materials}\label{gather-submission-materials}
+
+Once you are satisfied with the status of your Notebook, you should save
+it in a format that will make it easy for others to read. You can use
+the \textbf{File -\textgreater{} Download as -\textgreater{} HTML
+(.html)} menu to save your notebook as an .html file. If you are working
+locally and get an error about "No module name", then open a terminal
+and try installing the missing module using
+\texttt{pip\ install\ \textless{}module\_name\textgreater{}} (don't
+include the "\textless{}" or "\textgreater{}" or any words following a
+period in the module name).
+
+You will submit both your original Notebook and an HTML or PDF copy of
+the Notebook for review. There is no need for you to include any data
+files with your submission. If you made reference to other websites,
+books, and other resources to help you in solving tasks in the project,
+make sure that you document them. It is recommended that you either add
+a "Resources" section in a Markdown cell at the end of the Notebook
+report, or you can include a \texttt{readme.txt} file documenting your
+sources.
+
+\subsubsection{Submit the Project}\label{submit-the-project}
+
+When you're ready, click on the "Submit Project" button to go to the
+project submission page. You can submit your files as a .zip archive or
+you can link to a GitHub repository containing your project files. If
+you go with GitHub, note that your submission will be a snapshot of the
+linked repository at time of submission. It is recommended that you keep
+each project in a separate repository to avoid any potential confusion:
+if a reviewer gets multiple folders representing multiple projects,
+there might be confusion regarding what project is to be evaluated.
+
+It can take us up to a week to grade the project, but in most cases it
+is much faster. You will get an email once your submission has been
+reviewed. If you are having any problems submitting your project or wish
+to check on the status of your submission, please email us at
+dataanalyst-project {[}at{]} udacity.com. In the meantime, you should
+feel free to continue on with your learning journey by beginning the
+next module in the program.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
